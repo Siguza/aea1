@@ -170,8 +170,8 @@ int main(int argc, const char **argv)
     if(argc - aoff < 1 || argc - aoff > 2)
     {
         fprintf(stderr, "Usage:\n"
-                        "    %s file.aea        - Dump all as JSON\n"
-                        "    %s file.aea [prop] - Dump single prop raw\n"
+                        "    %s file.aea        - Dump all props as JSON\n"
+                        "    %s file.aea [prop] - Dump single prop value raw\n"
                         "    %s -l file.aea     - Dump prop names, one per line\n"
                         , argv[0], argv[0], argv[0]);
         return 1;
@@ -239,6 +239,7 @@ int main(int argc, const char **argv)
     aea = NULL;
 
     bool first = true;
+    bool found = false;
     if(act == kActDump)
     {
         printf("{");
@@ -307,6 +308,7 @@ int main(int argc, const char **argv)
             case kActValue:
                 if(strcmp(prop, name) == 0)
                 {
+                    found = true;
                     fwrite(value, len, 1, stdout);
                     printf("\n");
                 }
@@ -322,6 +324,11 @@ int main(int argc, const char **argv)
     }
     
     free(meta);
+
+    if(act == kActValue && !found)
+    {
+        return 2;
+    }
 
     return 0;
 }
