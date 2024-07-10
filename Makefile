@@ -3,7 +3,7 @@ SRC                 := src
 META                := aea1meta
 META_C              := meta.c
 META_H     	        :=
-META_CC_FLAGS       := -std=c99 -Wall -O3 -flto
+META_CC_FLAGS       := -std=c99 -Wall -O3 -flto -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE=1
 META_LD_FLAGS       :=
 META_LD_LIBS        :=
 ifdef HPKE
