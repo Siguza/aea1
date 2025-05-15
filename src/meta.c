@@ -515,7 +515,7 @@ static void b64p(const uint8_t *buf, size_t len)
 
 #ifdef WITH_OPENSSL
 #include <openssl/opensslv.h>
-#if OPENSSL_VERSION_MAJOR < 3 || OPENSSL_VERSION_MINOR < 2
+#if OPENSSL_VERSION_MAJOR < 3 || (OPENSSL_VERSION_MAJOR == 3 && OPENSSL_VERSION_MINOR < 2)
 #   error OpenSSL before version 3.2 does not support HPKE.
 #endif
 #include <openssl/bio.h>
